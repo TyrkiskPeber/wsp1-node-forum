@@ -10,8 +10,9 @@ const pool = mysql.createPool({
 });
 const promisePool = pool.promise();
 
-router.get('/', async function (req, res) {
-    res.send('Hello you!')
+router.get('/', async function (req, res, next) {
+    const [rows] = await promisePool.query("SELECT * FROM lg09forum");
+    res.json({ rows });
 });
 
 module.exports = router;
