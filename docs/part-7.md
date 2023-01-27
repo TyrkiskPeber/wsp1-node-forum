@@ -1,34 +1,39 @@
+# Del 7 - Intermission, glöm inte din frontend
 
-## Hämta alla inlägg med författare i node
+- [ ] Snygga till och få allt att fungera
 
-Uppdatera SQL frågan i index routen.
+## Ta en paus från serverkoden
 
-## Posta nya inlägg med författare
+Förhoppningsvis så fungerar din server nu och du kan köra den. Den hämtar poster från databasen, eventuellt med författare, men kanske utan. Det är okej.
 
-Uppdatera SQL frågan i new routen.
+Förmodligen ser din sida ut som något katten släpat upp ur ett dike, det är så det är med enbart HTML.
 
-## Uppdatera formuläret
+Nu är det dock dags att köra lite repetition från tidigare delar i kursen.
 
-Uppdatera formuläret i new.njk så att författaren är en dropdown.
+- Fixa dina templater och navigation, jobba med NJK
+- Fixa css.
+    - Centrerad layout troligast
+    - Navigation, burgare?
+- Design och tillgänglighet
+    - Färger
+    - Typsnitt
+    - Bilder
 
-```html
-<label for="author">Författare</label>
-<select name="author" id="author">
-    {% for user in users %}
-        <option value="{{ user.id }}">{{ user.name }}</option>
-    {% endfor %}
-</select>
-```
+### Bootstrap eller annat css ramverk
 
-Uppdatera routen för att hämta alla användare.
+Om du inte tycker att design är världens bästa grej utan mest vill att saker ska se bra ut, så kan du testa att använda Bootstrap.
 
-```js
-router.get('/new', async function (req, res, next) {
-    const [users] = await promisePool.query("SELECT * FROM ja15users");
-    res.render('new.njk', {
-        title: 'Nytt inlägg',
-        users,
-    });
-});
-```
+Du kan installera det med NPM eller länka in, du hittar det på [getbootstrap](https://getbootstrap.com/) med dokumentation och exempel.
+Börja [här](https://getbootstrap.com/docs/5.3/getting-started/introduction/).
+
+Vill du vara mer fancy kan du testa [Tailwind](https://tailwindcss.com/).
+
+Kaj tycker ni kan prova [Pico](https://picocss.com/).
+
+## Men min css laddas ju inte
+
+Kolla sass biten från förra uppgiften.
+Jag har en public mapp men... [static files](https://expressjs.com/en/starter/static-files.html)
+
+
 [Del 8](part-8.md)
