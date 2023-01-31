@@ -16,7 +16,7 @@ router.get('/', async function (req, res, next) {
 });
 
 router.get('/new', async function (req, res, next) {
-    const [users] = await promisePool.query("SELECT * FROM ja15users");
+    const [users] = await promisePool.query("SELECT * FROM lg09users");
     res.render('new.njk', {
         title: 'Nytt inlägg',
         users,

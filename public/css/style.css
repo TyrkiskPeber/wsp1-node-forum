@@ -1,5 +1,9 @@
-.body {
-  background-color: #FF0000;
+body {
+  background-color: hotpink;
+}
+
+.grid {
+  display: grid;
 }
 
 /*# sourceMappingURL=style.css.map */

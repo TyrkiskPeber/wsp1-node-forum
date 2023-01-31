@@ -5,7 +5,8 @@ const app = express();
 const port = 3000;
 
 const indexRouter = require('./routes/index');
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended:false}));
 nunjucks.configure('views', {
     autoescape: true,
     express: app,
