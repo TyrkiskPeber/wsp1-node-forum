@@ -10,8 +10,9 @@ const pool = mysql.createPool({
 });
 const promisePool = pool.promise();
 
-router.get('/', async function (req, res, next) {
-    const [rows] = await promisePool.query("SELECT * FROM lg09forum");
+router.get('/raw', async function (req, res, next) {
+    const [rows] = await promisePool.query(`SELECT lg09forum.*, lg09users.name FROM lg09forum
+    JOIN lg09users ON lg09forum.authorId = lg09users.id`);
     res.json({ rows });
 });
 
@@ -19,14 +20,24 @@ router.get('/', async function (req, res, next) {
 router.post('/new', async function (req, res, next) {
     const { author, title, content } = req.body;
     const [rows] = await promisePool.query("INSERT INTO lg09forum (authorId, title, content) VALUES (?, ?, ?)", [author, title, content]);
-    res.redirect('/');
+    res.redirect('/forum');
 });
 
 router.get('/new', async function (req, res, next) {
-    const [users] = await promisePool.query("SELECT * FROM lg09users");
+    const [users] = await promisePool.query(`SELECT lg09forum.*, lg09users.name FROM lg09forum
+    JOIN lg09users ON lg09forum.authorId = lg09users.id`);
     res.render('new.njk', {
         title: 'Nytt inlägg',
         users,
+    });
+});
+
+router.get('/forum', async function (req, res, next) {
+    const [posts] = await promisePool.query(`SELECT lg09forum.*, lg09users.name FROM lg09forum
+    JOIN lg09users ON lg09forum.authorId = lg09users.id`);
+    res.render('forum.njk', {
+        title: 'Nazarick',
+        posts,
     });
 });
 
